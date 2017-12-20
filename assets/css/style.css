@@ -1,0 +1,85 @@
+body {
+  font-family: 'Archivo Narrow', sans-serif;
+  background-image: url("../../assets/images/bluebg.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+/*.blink provide blicking animation */
+
+.blink {
+  animation: blinker 1.5s linear infinite;
+}
+
+/*.blink provide blicking animation when timer is <10 seconds */
+
+.blink1 {
+  animation: blinker 2s linear infinite;
+  color: red;
+}
+
+/*.blink provide blicking animation for Enter button*/
+
+.blink2 {
+  animation: blinker 4s linear infinite;
+}
+
+/*.blink provide blicking animation for Enter button*/
+
+.blink3 {
+  animation: blinker 1s linear infinite;
+  color: red;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.gifsize img {
+  height: 100%;
+  width: 100%;
+  max-height: 300px;
+  max-width: 450px;
+}
+
+.picSize {
+  height: 100%;
+  width: 100%;
+  max-height: 400px;
+  max-width: 980px;
+}
+
+.picSize2 {
+  height: 100%;
+  width: 100%;
+  max-height: 200px;
+  max-width: 680px;
+}
+
+.gpborder {
+  border: 1px solid #f8f9f9;
+  padding: 15px;
+  background-color: #f8f9f9;
+  font-size: 22px;
+}
+
+.triviaStyling {
+  background-color: #f8f9f9;
+  font-size: 22px;
+}
+
+.gpmarginTop {
+  margin-top: 10px;
+}
+
+.gpmarginBottom {
+  margin-bottom: 10px;
+}
+
+.button {
+  border-radius: 8px;
+  background-color: #afeeee;
+  padding: 10px 20px;
+}
