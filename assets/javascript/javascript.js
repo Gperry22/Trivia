@@ -39,6 +39,9 @@ function renderQuestion() {
             $('#testPosition').text('You got ' + correct + ' of ' + questions.length + " questions correct.")
             $('#testQues').text("Test completed")
             $('#show-number').html(" <b>Game Over!</b>");
+            $("#restartGame").append("<button class='button></button>");
+            $("#submitButton").append(  '<a href="trivia.html"><button class="button">Restart Game</button></a>');
+
             return false;
           }
 
@@ -51,22 +54,19 @@ function renderQuestion() {
       $("#testQues").append("<input type='radio' name='choices' value='A'>  " + chA + "<br>");
       $("#testQues").append("<input type='radio' name='choices' value='B'>  " + chB + "<br>");
       $("#testQues").append("<input type='radio' name='choices' value='C'>  " + chC + "<br><br>");
-      $("#submitButton").append("<button class='button' onclick='checkAnswer()'>Submit</button>");
+      $("#submitButton").append(  "  <button class='button' onclick='checkAnswer()'>Submit</button>    "   );
+
       emptyNotChecked()
 }
-
-
-
-
 
 ///////////////////////Functions defined Below///////////////////
 function checkAnswer() {
   choices = document.getElementsByName("choices");
-        if (choices[0].checked || choices[1].checked || choices[2].checked) {
-          for (var i = 0; i < choices.length; i++) {
-            if (choices[i].checked) {
-              choice = choices[i].value;
-            }
+if (choices[0].checked || choices[1].checked || choices[2].checked) {
+      for (var i = 0; i < choices.length; i++) {
+        if (choices[i].checked) {
+           choice = choices[i].value;
+          }
           }
     if (questions[position][4] === choice) {
           correct++;
