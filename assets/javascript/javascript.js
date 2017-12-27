@@ -1,188 +1,177 @@
-var number = 30; //number of Seconds user has to reach targetScore
+var  currentQuestion, correct, incorrect, skipped, pickedAnswer;
+var number = 25; //number of Seconds user has to reach targetScore
 var intervalId; //var for the second decrement
+var answer=false;
 var isTimerRunning = false;
-var answerNotChosen = false;
-var nextButton = false;
-var position = 0;
-var question = 0;
-var testPostion, testQues, chA, chB, chC, choice, choices;
-var correct = 0;
-var incorrect = 0;
-var choice;
-var array;
-var questions = [
-  ['Areosmith and Run DMC wanted you to do what?', 'Walk this way.', 'Live on a prayer.', 'Dream on.', 'A', 'assets/images/aerosmith.gif'],
-  ['In 1975 Van McCoy ask you to do what?', 'Stay Alive', 'Move Side to Side', 'The Hustle', 'C', 'assets/images/hustle.gif'],
-  ['What did Alanis Morrisette keep in her Pocket?', 'A Slim Jim', 'On Hand', 'A Switch Blade', 'B', 'assets/images/pocket.gif'],
-  ['You might not like PDA but Hootie and the Blowfish asked you to do something for him.', 'Hold my hand', 'Kiss him', 'Hug him', 'A', 'assets/images/hootie.gif'],
-  ['Did he do that? Yes he did. Steve Urkel wanted you to do this dance', 'The Urkel', 'The Electric Slide', 'The Macarena', 'A', 'assets/images/urkel.gif'],
-  ['In 1977, Queen, said they would do what to you?', 'Dance the night Away', 'We will Rock you', 'Rock you to Sleep', 'B', 'assets/images/rockyou.gif'],
-  ['Kris Kross made you want to perform what type ofcalisthenics?', 'Stretch', 'Push Up', 'Jump', 'C', 'assets/images/kriskross.gif'],
-  ['Journey asked you to PLEASE not do something', 'Living', 'Breathing', 'Believing', 'C', 'assets/images/journey.gif'],
-  ['Kevin McCallister knows a cat who can really do the...', 'Charleston', 'Cool Jerk', 'Twist', 'B', 'assets/images/cooljerk.gif'],
-  ['In 1973 Areosmith asked you to do what?', 'Sleep', 'Hold on', 'Dream On', 'C', 'assets/images/dreamon.gif']
-];
+
+var questions= [
+  {
+    question: 'Areosmith and Run DMC wanted you to do what?',
+    choices:  ['Walk this way','Live on a prayer','Dream on'],
+    answer:   'Walk this way',
+    gif:      'assets/images/aerosmith.gif',
+  },
+  {
+    question: 'In 1975 Van McCoy ask you to do what?',
+    choices:  ['Stay Alive','Move Side to Side','The Hustle'],
+    answer:   'The Hustle',
+    gif:      'assets/images/hustle.gif',
+  },
+  {
+    question: 'What did Alanis Morrisette keep in her Pocket?',
+    choices:  ['A Slim Jim','One Hand','A Switch Blade'],
+    answer:   'One Hand',
+    gif:      'assets/images/pocket.gif'
+  },
+  {
+    question:  'You might not like PDA but Hootie and the Blowfish asked you to do something for him.',
+    choices:   ['Hold my hand','Kiss him','Hug him'],
+    answer:    'Hold my hand',
+    gif:       'assets/images/hootie.gif'
+  },
+  {
+    question: 'Did he do that? Yes he did. Steve Urkel wanted you to do this dance',
+    choices:  ['The Urkel','The Electric Slide','The Macarena'],
+    answer:   'The Urkel',
+    gif:      'assets/images/urkel.gif',
+  },
+  {
+    question: 'In 1977, Queen, said they would do what to you?',
+    choices:  ['Dance the night Away','We Will Rock you','Rock you to Sleep'],
+    answer:   'We Will Rock you',
+    gif:      'assets/images/rockyou.gif'
+  },
+  {
+    question: 'Kris Kross made you want to perform what type ofcalisthenics?',
+    choices:  ['Strech','Push up','Jump'],
+    answer:   'Jump',
+    gif:      'assets/images/kriskross.gif'
+  },
+  {
+    question: 'Journey asked you to PLEASE not do something',
+    choices:  ['Living','Breathing','Believing'],
+    answer:   'Believing',
+    gif:      'assets/images/journey.gif'
+  },
+  {
+    question: 'Kevin McCallister knows a cat who can really do the...',
+    choices:  ['Charleston','Cool Jerk','Twist'],
+    answer:   'Cool Jerk',
+    gif:      'assets/images/cooljerk.gif'
+  },
+  {
+    question: 'In 1973 Areosmith asked you to do what?',
+    choices:  ['Sleep','Hold on','Dream On'],
+    answer:   'Dream On',
+    gif:      'assets/images/dreamon.gif'
+  }
+]
 
 
-writeToDOM()
-renderQuestion()
-runTimer()
+$('#startBtn').on('click', function(){
+	$(this).hide();
+	newGame();
+});
 
 
-
-function renderQuestion() {
-          nextBtn_Remove()
-          winMessageAndGif()
-          rmClass()
-
-          if (position >= questions.length) {
-            $('#testPosition').text('You got ' + correct + ' of ' + questions.length + " questions correct.")
-            $('#testQues').text("Test completed")
-            $('#show-number').html(" <b>Game Over!</b>");
-            $("#restartGame").append("<button class='button></button>");
-            $("#submitButton").append(  '<a href="trivia.html"><button class="button">Restart Game</button></a>');
-
-            return false;
-          }
-
-      $('#testPosition').text('Question ' + (position + 1) + ' of ' + questions.length);
-      question = questions[position][0];
-      chA = questions[position][1];
-      chB = questions[position][2];
-      chC = questions[position][3];
-      $('#testQues').html(question + "<br><br>");
-      $("#testQues").append("<input type='radio' name='choices' value='A'>  " + chA + "<br>");
-      $("#testQues").append("<input type='radio' name='choices' value='B'>  " + chB + "<br>");
-      $("#testQues").append("<input type='radio' name='choices' value='C'>  " + chC + "<br><br>");
-      $("#submitButton").append(  "  <button class='button' onclick='checkAnswer()'>Submit</button>    "   );
-
-      emptyNotChecked()
+function newGame(){
+    correct=0;
+    incorrect=0;
+    currentQuestion=0;
+    skipped=0;
+    newQuestion()
 }
 
-///////////////////////Functions defined Below///////////////////
-function checkAnswer() {
-  choices = document.getElementsByName("choices");
-if (choices[0].checked || choices[1].checked || choices[2].checked) {
-      for (var i = 0; i < choices.length; i++) {
-        if (choices[i].checked) {
-           choice = choices[i].value;
-          }
-          }
-    if (questions[position][4] === choice) {
-          correct++;
-          $("#correct").addClass("blink3");
-          $("#correct").text("Correct " + correct);
-          $("#winLosemessage").text("Correct!!!");
-          $("#gif").append("<img src=\"" + questions[position][5] + "\">");
-          submit_BtnRemove_NextBtn_Add()
-          stopClock()
+function newQuestion(){
+      answer=false;
+      $('#question').empty();
+      $('#timer').removeClass("blink1");
+
+  if (currentQuestion>= questions.length) {
+      $('#question').empty();
+      $('#question').append('GameOver<br><br>');
+      $('#question').append("Correct: " + correct +  "<br>  Incorrect: " + incorrect +  "<br> Skipped: " + skipped + "<br>");
+      $("#question").append("<button class='btn btn-primary blink' onclick='newGame()'>Play Again</button>");
+      return false;
+  }
+  else
+      runTimer()
+      $('#questionPostion').text('Question # ' + (currentQuestion+1) + ' of ' + questions.length);
+      $('#question').text(questions[currentQuestion].question)
+  for(var i=0; i<questions[currentQuestion].choices.length; i++){
+      var answerList = $('<div>');
+      answerList.text(questions[currentQuestion].choices[i]);
+      answerList.addClass('chooseAnswer');
+      answerList.data("data-choiceValue", questions[currentQuestion].choices[i]);
+      $('#question').append(answerList);
     }
-    else if (questions[position][4] != choice) {
-          incorrect++
-          $("#incorrect").addClass("blink3");
-          $("#incorrect").text("Incorrect " + incorrect);
-          $("#winLosemessage").text("Better Luck Next Time...");
-          $("#gif").append("<img src=\"" + questions[position][5] + "\">");
-          stopClock()
-          submit_BtnRemove_NextBtn_Add()
+  $('.chooseAnswer').on('click', function() {
+        pickedAnswer = $(this).data("data-choiceValue");
+        console.log(pickedAnswer);
+        answer = true;
+    if (answer === true) {
+        checkAnswer()
+      }
+      });
+}
+
+
+function checkAnswer(){
+    if (pickedAnswer === questions[currentQuestion].answer && answer === true) {
+        correct++
+        $('#question').empty();
+        $('#question').html('Correct, The answer was "' + questions[currentQuestion].answer + '".<br><br>');
+        stopClock()
+        showGif()
+    }
+    else if (pickedAnswer != questions[currentQuestion].answer && answer === true) {
+        incorrect++
+        $('#question').empty();
+        $('#question').html('Incorrect, The answer was "' + questions[currentQuestion].answer + '".<br><br>');
+        stopClock()
+        showGif()
     }
     else {
-          pleaseChooseAnAnswer()
     }
-  }
 }
 
-
-function submit_BtnRemove_NextBtn_Add() {
-  $('#submitButton').empty();
-  if (nextButton === false) {
-    nextButton = true;
-    $("#submitButton").append("<button class='button' onclick='next_Question_And_Postion()'>Next</button>");
-  }
+function showGif(){
+    var giphy = $('<img>');
+    giphy.attr('src', questions[currentQuestion].gif);
+    giphy.addClass('img-responsive');
+    $('#question').append(giphy);
+    setTimeout(newQuestion, 5000);
+    currentQuestion++;
 }
 
-function nextBtn_Remove() {
-  $('#submitButton').empty();
-  nextButton = false
-}
-
-function next_Question_And_Postion() {
-  position++
-  renderQuestion()
-  stopClock()
-  runTimer()
-  decrement()
-}
-
-//Warning to Answer and empty Answer Not Checked in DOM
-function pleaseChooseAnAnswer() {
-  if (answerNotChosen === false) {
-    answerNotChosen = true;
-    var warning = $("<p>Please choose an Answer</p>");
-    $('#notChecked').append(warning)
-  }
-}
-
-//Warning to Answer and empty Answer Not Checked in DOM
-function emptyNotChecked() {
-  $('#notChecked').empty();
-  answerNotChosen = false;
-}
-
-function winMessageAndGif() {
-  $('#winLosemessage').empty();
-  $('#gif').empty();
-}
 
 function runTimer() {
-  isTimerRunning = true;
-  intervalId = setInterval(decrement, 1000);
+    isTimerRunning = true;
+    intervalId = setInterval(decrement, 1000);
 }
 
 // decrement() decreases clock timer by -1. And sets if statment for if times runs out
 function decrement() {
-  if (position < questions.length) {
-    number--;
-    $("#show-number").html(number + " <h6><b>Seconds Left to answer...</b></h6>");
-    if (number < 10) {
-      $('#show-number').addClass("blink1");
-    }
-    if (number === 0) {
-      stopClock()
-      submit_BtnRemove_NextBtn_Add()
-      incorrect++
-      $("#incorrect").addClass("blink3");
-      $("#incorrect").text("Incorrect " + incorrect);
-      $("#winLosemessage").text("Better Luck Next Time...");
-      $("#gif").append("<img src=\"" + questions[position][5] + "\">");
-    }
-  } else {
-    $("#show-number").html(" <h6><b>Game Over!</b></h6>");
+  if (currentQuestion < questions.length) {
+        number--;
+        $("#timer").html(number);
+      if (number < 10) {
+        $('#timer').addClass("blink1");
+      }
+      if (number === 0) {
+        stopClock()
+        skipped++
+        $('#question').html('Out of Time! The answer was "' + questions[currentQuestion].answer + '".<br><br>');
+        showGif()
+      }
+    }  else {
+        $("#timer").html(" <h6><b>Game Over!</b></h6>");
   }
 }
 
 //stopClock clears the clock timer
 function stopClock() {
-  clearInterval(intervalId)
-  isTimerRunning = false;
-  number = 30
-}
-
-function rmClass() {
-  $('#show-number').removeClass("blink1");
-  $("#correct").removeClass("blink3");
-  $("#incorrect").removeClass("blink3");
-}
-
-function endOfGame() {
-  $('#testPosition').text('You got ' + correct + ' of ' + questions.length + " questions correct.")
-  $('#testQues').text("Test completed")
-  $('#show-number').html(" <b>Game Over!</b>");
-  return false;
-}
-
-function writeToDOM() {
-  $('#show-number').html(number + " <b>seconds Left to reach the Target Score!</b>");
-  $("#correct").text("Correct " + correct);
-  $("#incorrect").text("Incorrect " + incorrect);
+    clearInterval(intervalId)
+    isTimerRunning = false;
+    number = 25
 }

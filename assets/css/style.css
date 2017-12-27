@@ -1,8 +1,90 @@
-body {
-  font-family: 'Archivo Narrow', sans-serif;
-  background-image: url("../../assets/images/bluebg.jpg");
+body{
+  background-image: url("../../assets/images/bg.jpg");
   background-repeat: repeat;
   background-size: cover;
+}
+}
+
+.gpmargintop{
+  margin-top: 100px;
+}
+
+.gpmarginbottom{
+  margin-bottom: 100px;
+}
+
+.gifSize img {
+  height: 100%;
+  width: 100%;
+  max-height: 200px;
+  max-width: 400px;
+}
+
+.gpheight {
+  height: 100%;
+  max-height: 100px;
+  min-height: 50px;
+}
+
+.gpheight2 {
+  height: 100%;
+  max-height: 1000px;
+  min-height: 300px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.gppadding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.timer {
+  font-size: 140px;
+}
+
+.questionHeading {
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 40px
+}
+
+#question {
+  padding-top: 20px;
+  font-size: 30px;
+  font-family: 'Muli', sans-serif;
+}
+
+#question div {
+  /* font-style: italic; */
+  font-weight: normal;
+}
+
+#question div:hover {
+  background-color: #d1d2d3;
+}
+
+.instructionText {
+  font-size: 20px
+}
+
+.picSize {
+  height: 100%;
+  width: 100%;
+  max-height: 200px;
+  max-width: 780px;
+}
+
+.gpbg {
+  background-color: #acd0c0;
+}
+
+.gpbg1 {
+  background-color: #ffffff;
+}
+
+.seebutton {
+  visibility: hidden;
 }
 
 /*.blink provide blicking animation */
@@ -35,51 +117,4 @@ body {
   50% {
     opacity: 0;
   }
-}
-
-.gifsize img {
-  height: 100%;
-  width: 100%;
-  max-height: 300px;
-  max-width: 450px;
-}
-
-.picSize {
-  height: 100%;
-  width: 100%;
-  max-height: 400px;
-  max-width: 980px;
-}
-
-.picSize2 {
-  height: 100%;
-  width: 100%;
-  max-height: 200px;
-  max-width: 680px;
-}
-
-.gpborder {
-  border: 1px solid #f8f9f9;
-  padding: 15px;
-  background-color: #f8f9f9;
-  font-size: 22px;
-}
-
-.triviaStyling {
-  background-color: #f8f9f9;
-  font-size: 22px;
-}
-
-.gpmarginTop {
-  margin-top: 10px;
-}
-
-.gpmarginBottom {
-  margin-bottom: 10px;
-}
-
-.button {
-  border-radius: 8px;
-  background-color: #afeeee;
-  padding: 10px 20px;
 }

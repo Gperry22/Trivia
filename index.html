@@ -10,9 +10,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css" type="text/css">
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arimo"> -->
-  <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
-  <!-- Added link to the jQuery Library -->
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+<!--Added link to the jQuery Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
@@ -20,22 +19,35 @@
 <body>
 
 
+<div class="container ">
+  <div class="row gpmarginbottom">
 
-  <!-- instructions and click Enter button -->
-  <div class="container" id="instructions">
-    <div class="col-md-12 col-sm-12 text-center picSize">
+  </div>
+  <div class="row ">
+    <div class="  col-md-10  col-sm-12 col-xs-12   border text-center gpbg ">
       <img src="assets/images/trivia.png" class="img-responsive picSize" alt="Logo">
-      <div class="gpborder">
-        <p>How much Randon and Useless knowledge do you remember? Do you find yourself sometimes saying, "How do I know that?" or "That was random!"</p>
-        <p>Well you've come to the right place, "Welcome to Gabe's Trivia Game." The game is simple, simply choose one of the games below you'd like to play. When the timer starts you have 30 seconds to answer as many of the questions you can.</p>
-        <p>See, simple right! Well what are you waiting for! Good Luck</p>
-        <a href="trivia.html"><button class="blink button" type="button" id="triviaOneGame">Enter</button></a>
-      </div>
     </div>
   </div>
-
-
-
+  <div class="row">
+    <div id="questionPostion" class="  col-md-10  col-sm-12 col-xs-12   border text-center gpheight questionHeading gpbg">
+    </div>
+  </div>
+  <div class="row ">
+    <div id="timer" class="   col-md-3 col-sm-12 col-xs-12 border text-center timer gppadding gpbg1">
+    </div>
+    <div id="question" class="col-md-7  col-sm-12 col-xs-12 text-center border gifSize gppadding question gpbg1">
+      <div id="gif"></div>
+      <p class="instructionText">How much Randon and Useless knowledge do you remember? Do you find yourself sometimes saying, "How do I know that?" or "That was random!"</p>
+      <p class="instructionText">Well you've come to the right place, "Welcome to Gabe's Trivia Game." The game is simple, simply choose one of the games below you'd like to play. When the timer starts you have 25 seconds to answer as many of the questions you can.</p>
+      <p class="instructionText">See, simple right! Well what are you waiting for! Good Luck</p>
+      <button class='btn btn-primary blink' id='startBtn'>Enter</button>
+    </div>
+  </div>
+  <div class="row">
+    <div id="stats" class=" col-md-10  col-sm-12 col-xs-12   border text-center gpheight gpbg">
+    </div>
+  </div>
+</div>
 
 
 
