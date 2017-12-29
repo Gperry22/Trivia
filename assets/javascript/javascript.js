@@ -85,7 +85,7 @@ function newGame(){
 function newQuestion(){
       answer=false;
       $('#question').empty();
-      $('#timer').removeClass("blink1");
+      $('#clock').removeClass("blink1");
 
   if (currentQuestion>= questions.length) {
       $('#question').empty();
@@ -154,9 +154,9 @@ function runTimer() {
 function decrement() {
   if (currentQuestion < questions.length) {
         number--;
-        $("#timer").html(number);
+        $("#clock").html(number);
       if (number < 10) {
-        $('#timer').addClass("blink1");
+        $('#clock').addClass("blink1");
       }
       if (number === 0) {
         stopClock()
@@ -165,7 +165,7 @@ function decrement() {
         showGif()
       }
     }  else {
-        $("#timer").html(" <h6><b>Game Over!</b></h6>");
+        $("#clock").html(" <h6><b>Game Over!</b></h6>");
   }
 }
 

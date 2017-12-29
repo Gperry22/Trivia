@@ -1,16 +1,14 @@
 body{
   background-image: url("../../assets/images/bg.jpg");
   background-repeat: repeat;
+  background-position: center center;
   background-size: cover;
-}
+  background-attachment: fixed;
 }
 
-.gpmargintop{
-  margin-top: 100px;
-}
 
 .gpmarginbottom{
-  margin-bottom: 100px;
+  margin-bottom: 250px;
 }
 
 .gifSize img {
@@ -100,18 +98,7 @@ body{
   color: red;
 }
 
-/*.blink provide blicking animation for Enter button*/
 
-.blink2 {
-  animation: blinker 4s linear infinite;
-}
-
-/*.blink provide blicking animation for Enter button*/
-
-.blink3 {
-  animation: blinker 1s linear infinite;
-  color: red;
-}
 
 @keyframes blinker {
   50% {
